@@ -4,3 +4,12 @@ import {  default as Homepage } from './Homepage';
 import {  default as Cryptocurrencies } from './Cryptocurrencies.js';
 import {  default as News } from './News.js';
 import {  default as CryptoDetails } from './CryptoDetails.js';
+
+export {
+    Navbar,
+    Exchanges,
+    Homepage,
+    Cryptocurrencies,
+    News,
+    CryptoDetails,
+}
