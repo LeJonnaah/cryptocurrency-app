@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { useGetCryptoNewsQuery } from '../services/cryptoNewsApi'
 import { useGetCryptosQuery } from '../services/cryptoApi'
+import Loader from './Loader'
 
 const { Text, Title } = Typography
 const { Option } = Select
@@ -14,8 +15,7 @@ export default function News({ simplified }) {
   const { data: cryptoNews } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 12 })
   const { data } = useGetCryptosQuery(100)
 
-
-  if (!cryptoNews?.value) return 'Loading...'
+  if (!cryptoNews?.value) return <Loader />
 
   return (
     <Row gutter={[24, 24]}>

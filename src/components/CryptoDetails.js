@@ -4,8 +4,10 @@ import { useParams } from 'react-router-dom'
 import millify from 'millify'
 import { Col, Row, Typography, Select } from 'antd'
 import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, NumberOutlined, ThunderboltOutlined, LinkOutlined } from '@ant-design/icons'
+import {Link} from 'react-router-dom'
 
 import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../services/cryptoApi'
+import Loader from './Loader'
 
 const { Title, Text } = Typography
 const { Option } = Select
@@ -17,7 +19,7 @@ export default function CryptoDetails() {
 
   const cryptoDetails = data?.data?.coin
 
-  if (isFetching) return 'Loading...'
+  if (isFetching) return <Loader />
 
   const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y']
 
@@ -93,7 +95,9 @@ export default function CryptoDetails() {
       <Col className="coin-desc-link">
         <Row className="coin-desc">
           <Title level={3} className="coin-details-heading">
-            What is {cryptoDetails.name}
+            What is {cryptoDetails.name}?
+            <br />
+            <br />
             {HTMLReactParser(cryptoDetails.description)}
           </Title>
         </Row>
@@ -106,9 +110,13 @@ export default function CryptoDetails() {
               <Title level={5} className="link-name">
                 {link.type}
               </Title>
-              {/* <a href={link.url} target="_blank" rel="noreferrer">
-                {link.name}
-              </a> */}
+            <Link
+              to={link.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {link.name}
+            </Link>
             </Row>
           ))}
         </Col>
