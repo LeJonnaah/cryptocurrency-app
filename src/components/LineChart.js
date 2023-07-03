@@ -1,8 +1,10 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
 import { Col, Row, Typography } from 'antd';
-import { Chart, CategoryScale, LinearScale, LineController, LineElement } from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import { CategoryScale, Chart, LinearScale, PointElement, LineElement } from "chart.js";
 
+
+Chart.register(CategoryScale, LinearScale, PointElement, LineElement);
 
 const { Title } = Typography;
 
@@ -17,9 +19,6 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
     for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
         coinTimestamp.push(new Date(coinHistory?.data?.history[i].timestamp).toLocaleDateString());
     }
-
-    Chart.register(CategoryScale, LinearScale, LineController, LineElement);    
-    
     const data = {
         labels: coinTimestamp,
         datasets: [
@@ -42,6 +41,11 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
                     },
                 },
             ],
+            xAxes: [{
+                ticks: {
+                    display: false,
+                },
+            }],
         },
     };
 
