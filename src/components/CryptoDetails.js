@@ -18,6 +18,7 @@ const CryptoDetails = () => {
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
   const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timeperiod });
   const cryptoDetails = data?.data?.coin;
+  const cryptoColor = cryptoDetails?.color;
 
   if (isFetching) return <Loader />;
 
@@ -38,10 +39,13 @@ const CryptoDetails = () => {
     { title: 'Circulating Supply', value: `$ ${cryptoDetails?.supply?.circulating && millify(cryptoDetails?.supply?.circulating)}`, icon: <ExclamationCircleOutlined /> },
   ];
 
+
   return (
     <Col className="coin-detail-container">
       <Col className="coin-heading-container">
-        <Title level={2} className="coin-name">
+        <Title level={2} className="coin-name"
+          style={{ color: cryptoColor }}
+        >
           {data?.data?.coin.name} ({data?.data?.coin.symbol}) Price
         </Title>
         <p>{cryptoDetails.name} live price in US Dollar (USD). View value statistics, market cap and supply.</p>
@@ -49,7 +53,7 @@ const CryptoDetails = () => {
       <Select defaultValue="7d" className="select-timeperiod" placeholder="Select Timeperiod" onChange={(value) => setTimeperiod(value)}>
         {time.map((date) => <Option key={date}>{date}</Option>)}
       </Select>
-      <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails?.price)} coinName={cryptoDetails?.name} />
+      <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails?.price)} coinName={cryptoDetails?.name} cryptoColor={cryptoColor} />
       <Col className="stats-container">
         <Col className="coin-value-statistics">
           <Col className="coin-value-statistics-heading">

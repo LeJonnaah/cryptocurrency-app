@@ -1,53 +1,53 @@
 import React from 'react';
 import { Col, Row, Typography } from 'antd';
 import { Line } from 'react-chartjs-2';
-import { CategoryScale, Chart, LinearScale, PointElement, LineElement } from "chart.js";
-
-
-Chart.register(CategoryScale, LinearScale, PointElement, LineElement);
+import { Chart as ChartJS } from 'chart.js/auto'
+import { Chart } from 'react-chartjs-2'
 
 const { Title } = Typography;
 
-const LineChart = ({ coinHistory, currentPrice, coinName }) => {
+const LineChart = ({ coinHistory, currentPrice, coinName, cryptoColor }) => {
     const coinPrice = [];
     const coinTimestamp = [];
-
+    
     for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
-        coinPrice.push(coinHistory?.data?.history[i].price);
+        coinPrice.push(coinHistory?.data.history[i].price);
+        coinTimestamp.push(new Date(coinHistory?.data?.history[i]?.timestamp * 1000).toLocaleDateString());
     }
 
-    for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
-        coinTimestamp.push(new Date(coinHistory?.data?.history[i].timestamp).toLocaleDateString());
-    }
     const data = {
-        labels: coinTimestamp,
+        labels: coinTimestamp.reverse(),
         datasets: [
             {
                 label: 'Price In USD',
-                data: coinPrice,
+                data: coinPrice.reverse(),
                 fill: false,
-                backgroundColor: '#0071bd',
-                borderColor: '#0071bd',
+                backgroundColor: cryptoColor,
+                borderColor: cryptoColor,
             },
         ],
     };
 
-    const options = {
-        scales: {
-            yAxes: [
-                {
-                    ticks: {
-                        beginAtZero: true,
-                    },
-                },
-            ],
-            xAxes: [{
-                ticks: {
-                    display: false,
-                },
-            }],
+const options = {
+    elements: {
+        point: {
+            radius: 0
+        }
+    },
+    scales: {
+        x: {
+            grid: {
+                display: false
+            }
         },
-    };
+        y: {
+            grid: {
+                display: false
+            }
+        }
+    }
+};
+
 
     return (
         <>
