@@ -3,8 +3,8 @@ import { Select, Typography, Row, Col, Avatar, Card } from 'antd'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 
-import { useGetCryptoNewsQuery } from '../services/cryptoNewsApi'
-import { useGetCryptosQuery } from '../services/cryptoApi'
+import { useGetCryptoNewsQuery } from 'services/cryptoNewsApi'
+import { useGetCryptosQuery } from 'services/cryptoApi'
 import Loader from './Loader'
 
 const { Text, Title } = Typography
