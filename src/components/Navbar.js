@@ -29,23 +29,20 @@ export default function Navbar() {
         <div className="nav-container">
             <div className="logo-container">
                 <Avatar
-                    src="https://www.cryptocompare.com/media/37746251/ccc_new.png"
+                    src="https://cdn.pixabay.com/photo/2013/12/08/12/12/bitcoin-225079_1280.png"
                     size="large" />
                 <Typography.Title level={2} className="logo"><Link to="/">Cryptoverse</Link></Typography.Title>
                 <Button className="menu-control-container" onClick={() => setActiveMenu(!activeMenu)}><MenuOutlined /></Button>
             </div>
             {activeMenu && (
                 <Menu theme="dark">
-                    <Menu.Item icon={<HomeOutlined />}>
+                    <Menu.Item icon={<HomeOutlined />}key={1}>
                         <Link to="/">Home</Link>
                     </Menu.Item>
-                    <Menu.Item icon={<FundOutlined />}>
+                    <Menu.Item icon={<FundOutlined />} key={2}>
                         <Link to="/cryptocurrencies">Cryptocurrencies</Link>
                     </Menu.Item>
-                    {/* <Menu.Item icon={<MoneyCollectOutlined />}>
-                        <Link to="/exchanges">Exchanges</Link>
-                    </Menu.Item> */}
-                    <Menu.Item icon={<BulbOutlined />}>
+                    <Menu.Item icon={<BulbOutlined />} key={3}>
                         <Link to="/news">News</Link>
                     </Menu.Item>
                 </Menu>
